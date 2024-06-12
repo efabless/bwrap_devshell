@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "bwrap-devshell"
+version = "0.1.0"
+description = "Bubblewrap your Nix devshell"
+authors = ["Efabless Corporation and Contributors <donn@efabless.com>"]
+license = "ASL-2.0"
+readme = "Readme.md"
+
+[tool.poetry.scripts]
+bwrap_devshell = "bwrap_devshell.__main__:main"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.7"
+zstandard = "^0.22.0"
+rich = "^13.7.1"
+
+[tool.poetry.group.dev.dependencies]
+poetry = "^1.8.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
