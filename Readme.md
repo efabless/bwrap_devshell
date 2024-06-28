@@ -1,11 +1,36 @@
 # bwrap_devshell
 
+This is a script that tarballs a
+[numtide/devshell](https://github.com/numtide/devshell) and all of its
+dependencies, and adds a script that drops users into this devshell with the
+closure mounted in its expected location.
+
+## How?
+
+This script compresses a devshell's entire
+[closure](https://zero-to-nix.com/concepts/closures), symlinks and all, to be
+extracted with `tar -I zst -xPf ./out.tar.zst -C ./out`.
+
+An included script, `./out/start`, drops the caller into the devshell inside a
+[bubblewrap](https://github.com/containers/bubblewrap) environment where the
+closure is mounted at `/nix`, making it fully usable, even without Nix itself
+installed.
+
+## Why?
+
+In most cases, you should be using
+[nix-portable](https://github.com/DavHau/nix-portable).
+
+We encountered an exotic environment where systemd was not available
+and we needed to share a massive installation of OpenLane 2 across many users.
+From what we could tell, `nix-portable` requires the archive to be stored and
+for each user to have a writable space for the archive. This allows the closure
+to be shared by multiple users without the Nix daemon (or indeed a Nix
+installation at all) available.
 
 
 ## License
-Copyright 2024 Efabless Corporation.
-
-
+Copyright 2024 Efabless Corporation. Available under the
 [The Apache License, version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
 ---

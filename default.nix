@@ -15,7 +15,10 @@ buildPythonPackage {
   nativeBuildInputs = [poetry-core];
   propagatedBuildInputs = [click zstandard rich];
 
-  meta = {
+  meta = with lib; {
+    description = "Bubble-wraps a numtide/devshell for deployment in exotic environments";
     mainProgram = "bwrap_devshell";
+    license = licenses.asl20;
+    platforms = platforms.linux;
   };
 }
