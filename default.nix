@@ -1,4 +1,5 @@
 {
+  lib,
   buildPythonPackage,
   python3,
   click,
